@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator - Know Your Exact Age</title>
+    <meta name="description" content="Calculate your exact age in years, months, and days with our beautiful age calculator tool.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+    </button>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <circle cx="20" cy="20" r="18" stroke="url(#gradient)" stroke-width="3"/>
+                    <path d="M20 8V20L26 26" stroke="url(#gradient)" stroke-width="3" stroke-linecap="round"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40">
+                            <stop offset="0%" stop-color="#667eea"/>
+                            <stop offset="100%" stop-color="#764ba2"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <h1 class="title">Age Calculator</h1>
+            <p class="subtitle">Discover your exact age with precision</p>
+        </header>
+
+        <!-- Calculator Card -->
+        <main class="calculator-card">
+            <form id="ageForm" class="age-form" novalidate>
+                <div class="form-header">
+                    <h2>Enter Your Birth Date</h2>
+                </div>
+
+                <div class="input-grid">
+                    <!-- Day Input -->
+                    <div class="input-group">
+                        <label for="day" class="input-label">Day</label>
+                        <input 
+                            type="number" 
+                            id="day" 
+                            name="day" 
+                            placeholder="DD" 
+                            min="1" 
+                            max="31"
+                            required
+                            aria-label="Day"
+                        >
+                        <span class="error-message" id="dayError"></span>
+                    </div>
+
+                    <!-- Month Input -->
+                    <div class="input-group">
+                        <label for="month" class="input-label">Month</label>
+                        <select id="month" name="month" required aria-label="Month">
+                            <option value="">MM</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                        <span class="error-message" id="monthError"></span>
+                    </div>
+
+                    <!-- Year Input -->
+                    <div class="input-group">
+                        <label for="year" class="input-label">Year</label>
+                        <input 
+                            type="number" 
+                            id="year" 
+                            name="year" 
+                            placeholder="YYYY" 
+                            min="1900" 
+                            max="2025"
+                            required
+                            aria-label="Year"
+                        >
+                        <span class="error-message" id="yearError"></span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary" id="calculateBtn">
+                        <span>Calculate Age</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="resetBtn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                            <path d="M21 3v5h-5"/>
+                            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                            <path d="M3 21v-5h5"/>
+                        </svg>
+                        <span>Reset</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection">
+                <div class="results-header">
+                    <h3>Your Age</h3>
+                </div>
+
+                <div class="age-display">
+                    <div class="age-card">
+                        <div class="age-value" id="yearsValue">0</div>
+                        <div class="age-label">Years</div>
+                    </div>
+                    <div class="age-card">
+                        <div class="age-value" id="monthsValue">0</div>
+                        <div class="age-label">Months</div>
+                    </div>
+                    <div class="age-card">
+                        <div class="age-value" id="daysValue">0</div>
+                        <div class="age-label">Days</div>
+                    </div>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="additional-info">
+                    <div class="info-item">
+                        <div class="info-icon"></div>
+                        <div class="info-content">
+                            <div class="info-label">Next Birthday</div>
+                            <div class="info-value" id="nextBirthday">--</div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"></div>
+                        <div class="info-content">
+                            <div class="info-label">Total Days Lived</div>
+                            <div class="info-value" id="totalDays">--</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Crafted with <span class="heart"></span> by <span class="developer-name">Ahmad</span></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
